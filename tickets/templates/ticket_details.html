@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block title %}Ticket Details - HelpHive{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Ticket Header -->
+  <div class="text-center mb-4">
+    <h1 class="fw-bold">Ticket Details</h1>
+    <p class="text-muted">View all details about the selected ticket and its comments.</p>
+  </div>
+
+  <!-- Ticket Details Section -->
+  <div class="card shadow-sm mb-5">
+    <div class="card-body">
+      <h4 class="card-title fw-bold mb-3">Ticket Information</h4>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <p><strong>Title:</strong> {{ ticket.title|capfirst }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Description:</strong> {{ ticket.description }}</p>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <p><strong>Status:</strong> <span class="badge bg-info">{{ ticket.status|capfirst }}</span></p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Priority:</strong> <span class="badge bg-warning">{{ ticket.priority|capfirst }}</span></p>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <p><strong>Created At:</strong> {{ ticket.created_at }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Updated At:</strong> {{ ticket.updated_at }}</p>
+        </div>
+      </div>
+      <div class="row mb-2">
+        <div class="col-md-6">
+          <p><strong>Created By:</strong> {{ ticket.user|capfirst }}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Assigned To:</strong> {{ ticket.assigned_to|capfirst }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comments Section -->
+  <div class="card shadow-sm mb-5">
+    <div class="card-body">
+      <h4 class="card-title fw-bold mb-3">Comments</h4>
+      {% if ticket.comment_set.exists %}
+      <div class="list-group">
+        {% for comment in ticket.comment_set.all %}
+        <div class="list-group-item">
+          <div class="d-flex justify-content-between align-items-center">
+            <strong>{{ comment.author|capfirst }}</strong>
+            <span class="text-muted small">{{ comment.created_at }}</span>
+          </div>
+          <p class="mb-0">{{ comment.comment }}</p>
+        </div>
+        {% endfor %}
+      </div>
+      {% else %}
+      <p class="text-muted text-center">No comments yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="d-flex justify-content-between">
+    <a href="{% url 'view_tickets' %}" class="btn btn-secondary btn-lg">Back</a>
+    <a href="{% url 'add_comment' ticket.pk %}" class="btn btn-primary btn-lg">Add Comment</a>
+  </div>
+</div>
+{% endblock %}

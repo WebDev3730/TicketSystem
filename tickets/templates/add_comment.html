@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Comment - HelpHive{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Form Header -->
+  <div class="text-center mb-4">
+    <h1 class="fw-bold">Add Comment</h1>
+    <p class="text-muted">Provide additional details or updates for this ticket.</p>
+  </div>
+
+  <!-- Form Container -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg">
+        <div class="card-body p-5">
+          <form method="POST">
+            {% csrf_token %}
+            <!-- Comment Field -->
+            <div class="form-floating mb-4">
+              {{ form.comment }}
+              {{ form.comment.errors }}
+              <label for="id_comment">Enter Comment Here...</label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100">Add Comment</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

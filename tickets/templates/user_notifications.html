@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Your Notifications - HelpHive{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <!-- Page Header -->
+  <div class="text-center mb-4">
+    <h1 class="fw-bold">Your Notifications</h1>
+    <p class="text-muted">Stay updated on your tickets and activities.</p>
+  </div>
+
+  {% if notifications %}
+  <!-- Notifications Table -->
+  <div class="table-responsive shadow-sm">
+    <table class="table table-striped table-hover align-middle">
+      <thead class="table-light">
+        <tr>
+          <th scope="col">Message</th>
+          <th scope="col">Date</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for notification in notifications %}
+        <tr>
+          <td>{{ notification.message }}</td>
+          <td>{{ notification.created_at|date:"Y-m-d H:i" }}</td>
+          <td>
+            <div class="d-flex gap-2">
+              <a href="{% url 'ticket_details' notification.ticket.pk %}" class="btn btn-success btn-sm">View Ticket</a>
+              <a href="{% url 'mark_as_read' notification.id %}" class="btn btn-danger btn-sm">Mark as Read</a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <!-- No Notifications -->
+  <div class="text-center py-5">
+    <h3 class="text-muted">No Unread Notifications</h3>
+    <p class="text-muted">You’re all caught up!</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

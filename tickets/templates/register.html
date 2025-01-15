@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - HelpHive{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center min-vh-100">
+  <div class="col-md-6 col-lg-4">
+    <div class="card shadow-lg">
+      <div class="card-body">
+        <h2 class="text-center fw-bold mb-4">Create an Account</h2>
+        <form method="POST" action="{% url 'register' %}">
+          {% csrf_token %}
+          <!-- Username Field -->
+          <div class="form-floating mb-3">
+            {{ form.username }}
+            {{ form.username.errors }}
+            <label for="id_username">Username</label>
+          </div>
+
+          <!-- Email Field -->
+          <div class="form-floating mb-3">
+            {{ form.email }}
+            {{ form.email.errors }}
+            <label for="id_email">Email</label>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-floating mb-3">
+            {{ form.password1 }}
+            {{ form.password1.errors }}
+            <label for="id_password1">Password</label>
+          </div>
+
+          <!-- Confirm Password Field -->
+          <div class="form-floating mb-3">
+            {{ form.password2 }}
+            {{ form.password2.errors }}
+            <label for="id_password2">Confirm Password</label>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary btn-lg">Register</button>
+          </div>
+
+          <!-- Back to Login -->
+          <p class="text-center text-muted mt-3">
+            Already have an account? <a href="{% url 'login' %}" class="text-primary">Log In</a>.
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

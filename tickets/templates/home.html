@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<body>
+  <!-- Hero Section -->
+  <section class="hero d-flex align-items-center text-center text-lg-start py-5">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6">
+          <h1 class="display-4 fw-bold">Simplify IT Ticket Management</h1>
+          <p class="lead">Effortless IT ticket management for businesses and individuals. Resolve issues faster with HelpHive.</p>
+          <div class="mt-4">
+            <a href="{% url 'register' %}" class="btn btn-warning btn-lg me-3">Get Started Now</a>
+            <a href="#features" class="btn btn-outline-light btn-lg">Learn More</a>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <img src="/static/images/hero-illustratio.png" class="rounded-4" alt="Hero Illustration">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="py-5 bg-light">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-4">Why Choose HelpHive?</h2>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <i class="bi bi-speedometer2 display-4 text-primary"></i>
+              <h5 class="card-title mt-3">Fast Ticket Submission</h5>
+              <p class="card-text">Submit issues in seconds and streamline the process.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <i class="bi bi-bell-fill display-4 text-primary"></i>
+              <h5 class="card-title mt-3">Real-Time Updates</h5>
+              <p class="card-text">Get live updates on ticket status and progress.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <i class="bi bi-grid-fill display-4 text-primary"></i>
+              <h5 class="card-title mt-3">Priority Management</h5>
+              <p class="card-text">Sort and prioritize tickets for quick resolutions.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <i class="bi bi-people-fill display-4 text-primary"></i>
+              <h5 class="card-title mt-3">Collaborative Tools</h5>
+              <p class="card-text">Work with your team to resolve issues faster.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials my-5">
+    <div class="container text-center">
+      <h3 class="fw-bold mb-4">What Our Users Say</h3>
+      <div class="row">
+        <div class="col-md-4">
+          <blockquote class="blockquote bg-light p-4 rounded shadow-sm">
+            <p>"HelpHive has transformed the way we handle IT issues in our company."</p>
+            <footer class="blockquote-footer">Jane Doe, IT Manager</footer>
+          </blockquote>
+        </div>
+        <div class="col-md-4">
+          <blockquote class="blockquote bg-light p-4 rounded shadow-sm">
+            <p>"I love how easy it is to submit and track tickets. Highly recommended!"</p>
+            <footer class="blockquote-footer">John Smith, Small Business Owner</footer>
+          </blockquote>
+        </div>
+        <div class="col-md-4">
+          <blockquote class="blockquote bg-light p-4 rounded shadow-sm">
+            <p>"The priority management feature has made our workflow much smoother."</p>
+            <footer class="blockquote-footer">Emily Brown, Project Manager</footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call-to-Action Section -->
+  <section class="cta text-center py-5">
+    <div class="container">
+      <h2 class="fw-bold mb-4">Ready to Get Started?</h2>
+      <p class="lead">Join thousands of users who trust HelpHive for seamless ticket management.</p>
+      <a href="{% url 'register' %}" class="btn btn-warning btn-lg mt-3">Sign Up Today</a>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock %}
