@@ -11,20 +11,8 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+import random
 # Create your views here.
-
-def ticketsubmission(request):
-    if request.method == 'POST':
-        form = TicketSubmissionForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('view_tickets')
-        
-    else:
-        form = TicketSubmissionForm()
-
-    return render(request, 'add_ticket.html', {'form': form})
-
 
 class TicketView(LoginRequiredMixin, ListView):
     model = Ticket
@@ -101,7 +89,17 @@ class CreateTicketView(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        form.save()
+        support_group = Group.objects.get(name='Support')
+        support_members = support_group.user_set.all()
+        members_list = list(support_members)
+        if support_members.exists():
+            selected_support_user = random.choice(members_list)
+        else:
+            selected_support_user = None
+        ticket = form.save(commit=False)
+        ticket.assigned_to = selected_support_user
+        ticket.save()
+        create_notification(ticket, selected_support_user, f"A New Ticket Has Been Created: {ticket.title}")
         return super().form_valid(form)
 
 class UpdateTicketView(UpdateView):
@@ -113,7 +111,18 @@ class UpdateTicketView(UpdateView):
     def form_valid(self, form):
         if self.request.user.groups.filter(name__in=['Admin', 'Support']).exists():
             form.instance.updated_by = self.request.user
+            support_group = Group.objects.get(name='Support')
+            support_members = support_group.user_set.all()
+            members_list = list(support_members)
+            if support_members.exists():
+                selected_support_user = random.choice(members_list)
+            else:
+                selected_support_user = None
+            ticket = form.save(commit=False)
+            ticket.assigned_to = selected_support_user
+            ticket.save()
             form.save()
+            create_notification(ticket, selected_support_user, f"A Ticket Has Been Assigned To You: {ticket.title}")
             return super().form_valid(form)
         else:
             raise PermissionDenied("You don't have permission to update this ticket.")

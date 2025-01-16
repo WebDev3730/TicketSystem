@@ -18,6 +18,8 @@ class TicketSubmissionForm(forms.ModelForm):
         }),
         label="",
     )
+    image = forms.ImageField(required=False, widget=forms.ClearableFileInput(
+        attrs={'class': 'form-control', 'placeholder': '', 'id': 'floatingdescription',}), label="")
     class Meta:
 
         model = Ticket
@@ -25,6 +27,7 @@ class TicketSubmissionForm(forms.ModelForm):
             'title',
             'description',
             'priority',
+            'image',
             
         ]
         
@@ -87,6 +90,7 @@ class TicketUpdateForm(forms.ModelForm):
             'priority',
             'status',
             'assigned_to',
+            
             
         ]
     def __init__(self, *args, **kwargs):

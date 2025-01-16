@@ -25,6 +25,7 @@ class Ticket(models.Model):
     priority = models.CharField(max_length=20, choices=priority_status, default='low')
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='updated_by')
     assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='assigned_to')
+    image = models.FileField(blank=True, null=True)
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)

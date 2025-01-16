@@ -28,6 +28,8 @@
             <th scope="col">Updated At</th>
             <th scope="col">Priority</th>
             <th scope="col">Status</th>
+            <!-- New column for the file -->
+            <th scope="col">File</th>
             <th scope="col">Actions</th>
           </tr>
         </thead>
@@ -44,6 +46,14 @@
               <span class="badge {% if ticket.status == 'resolved' %}bg-success{% else %}bg-info{% endif %}">
                 {{ ticket.status|capfirst }}
               </span>
+            </td>
+            <!-- Displaying the file (or a link to it) -->
+            <td>
+              {% if ticket.image %}
+                <a href="{{ ticket.image.url }}" target="_blank" class="text-decoration-none">View File</a>
+              {% else %}
+                <span class="text-muted">No File</span>
+              {% endif %}
             </td>
             <td>
               <a href="{% url 'update_ticket' ticket.pk %}" class="btn btn-sm btn-outline-secondary">Update</a>
